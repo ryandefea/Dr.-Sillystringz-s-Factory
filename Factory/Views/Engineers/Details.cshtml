@@ -2,27 +2,27 @@
   Layout = "_Layout";
 }
 
-@model Mob.Models.Criminal
+@model Factory.Models.Engineer
 
-<h2>Criminal Details</h2>
+<h2>Engineer Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
 
 @if(@Model.Jobs.Count == 0)
 {
-  <p>This criminal does not have any jobs</p>
+  <p>This engineer does not have any machines</p>
 }
 else 
 {
-  <h4>Jobs this criminal has:</h4>
+  <h4>Machines this engineer has:</h4>
   <ul>
-  @foreach(var join in Model.Jobs)
+  @foreach(var join in Model.Machines)
   {
-    <li>@join.Job.Description</li>
+    <li>@join.Machine.Description</li>
   }
   </ul>
 }
 
-<p>@Html.ActionLink("Edit Criminal", "Edit", new { id = Model.CriminalId })</p>
-<p>@Html.ActionLink("Delete Criminal", "Delete", new { id = Model.CriminalId })</p>
-<p>@Html.ActionLink("gabagool", "Index")</p>
+<p>@Html.ActionLink("Edit Engineer", "Edit", new { id = Model.EngineerId })</p>
+<p>@Html.ActionLink("Delete Engineer", "Delete", new { id = Model.EngineerId })</p>
+<p>@Html.ActionLink("Home", "Index")</p>
