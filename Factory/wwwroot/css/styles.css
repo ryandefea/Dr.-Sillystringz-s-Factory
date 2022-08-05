@@ -1,3 +1,41 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: blue;
+	padding: 1rem;
+	font-size: 1.5rem;
+	margin-bottom: 2rem;
+}
+
+.links ul {
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+.links li {
+	list-style-type: none;
+	display: block;
+	padding: 1rem;
+	text-decoration: none;
+}
+
+.links {
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
 div#footer {
 	position:fixed;
 	bottom:0px;
