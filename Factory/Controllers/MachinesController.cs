@@ -7,34 +7,34 @@ using System.Linq;
 
 namespace Factory.Controllers
 {
-  public class JobsController : Controller
+  public class MachinesController : Controller
   {
     private readonly FactoryContext _db;
 
-    public JobsController(FactoryContext db)
+    public MachinesController(FactoryContext db)
     {
       _db = db;
     }
 
     public ActionResult Index()
     {
-        return View(_db.Jobs.ToList());
+        return View(_db.Machines.ToList());
     }
 
     public ActionResult Create()
     {
-      ViewBag.CriminalId = new SelectList(_db.Criminals, "CriminalId", "Name");
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Job job, int CriminalId)
+    public ActionResult Create(Machine machine, int EngineerId)
     {
-      _db.Jobs.Add(job); // adds new job to database
-      _db.SaveChanges(); // save first so new job has an id
-      if (CriminalId != 0)
+      _db.Machines.Add(machine); // adds new machine to database
+      _db.SaveChanges(); // save first so new machine has an id
+      if (EngineerId != 0)
       {
-        _db.CriminalJob.Add(new CriminalJob() { CriminalId = CriminalId, JobId = job.JobId });
+        _db.EngineerMachine.Add(new EngineerMachine() { EngineerId = EngineerId, MachineId = machine.MachineId });
         _db.SaveChanges();
       }
       return RedirectToAction("Index");
@@ -42,46 +42,46 @@ namespace Factory.Controllers
 
     public ActionResult Details(int id)
     {
-        var thisJob = _db.Jobs
-          // .Include(job => job.Criminals) //gathers the CriminalIds associated with the Job object in Job.cs(this.Criminals)
-          // .ThenInclude(join => join.Criminal) //Grabs the Criminal object using their Id
+        var thisMachine = _db.Machines
+          // .Include(machine => machine.Engineers) //gathers the EngineerIds associated with the Machine object in Machine.cs(this.Engineers)
+          // .ThenInclude(join => join.Engineer) //Grabs the Engineer object using their Id
           //commented out to see if something breaks
-          .FirstOrDefault(job => job.JobId == id);//specifies which job we are working with
-        return View(thisJob);
+          .FirstOrDefault(machine => machine.MachineId == id);//specifies which machine we are working with
+        return View(thisMachine);
     }
 
     public ActionResult Edit(int id)
     {
-      var thisJob = _db.Jobs.FirstOrDefault(job => job.JobId == id);
-      ViewBag.CriminalId = new SelectList(_db.Criminals, "CriminalId", "Name");
-      return View(thisJob);
+      var thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
+      return View(thisMachine);
     }
 
     [HttpPost]
-    public ActionResult Edit(Job job, int CriminalId)
+    public ActionResult Edit(Machine machine, int EngineerId)
     {
-      if (CriminalId != 0)
+      if (EngineerId != 0)
       {
-        _db.CriminalJob.Add(new CriminalJob() { CriminalId = CriminalId, JobId = job.JobId });
+        _db.EngineerMachine.Add(new EngineerMachine() { EngineerId = EngineerId, MachineId = machine.MachineId });
       }
-      _db.Entry(job).State = EntityState.Modified;
+      _db.Entry(machine).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
-    public ActionResult AddCriminal(int id)
+    public ActionResult AddEngineer(int id)
     {
-        var thisJob = _db.Jobs.FirstOrDefault(job => job.JobId == id);
-        ViewBag.CriminalId = new SelectList(_db.Criminals, "Criminal", "Name");
-        return View(thisJob);
+        var thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
+        ViewBag.EngineerId = new SelectList(_db.Engineers, "Engineer", "Name");
+        return View(thisMachine);
     }
 
     [HttpPost]
-    public ActionResult AddCriminal(Job job, int CriminalId)
+    public ActionResult AddEngineer(Machine machine, int EngineerId)
     {
-        if (CriminalId != 0)
+        if (EngineerId != 0)
         {
-        _db.CriminalJob.Add(new CriminalJob() { CriminalId = CriminalId, JobId = job.JobId});
+        _db.EngineerMachine.Add(new EngineerMachine() { EngineerId = EngineerId, MachineId = machine.MachineId});
         _db.SaveChanges();
         }
         return RedirectToAction("Index");
@@ -89,24 +89,24 @@ namespace Factory.Controllers
     
     public ActionResult Delete(int id)
     {
-      var thisJob = _db.Jobs.FirstOrDefault(job => job.JobId == id);
-      return View(thisJob);
+      var thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
+      return View(thisMachine);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      var thisJob = _db.Jobs.FirstOrDefault(job => job.JobId == id);
-      _db.Jobs.Remove(thisJob);
+      var thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
+      _db.Machines.Remove(thisMachine);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     [HttpPost]
-    public ActionResult DeleteCriminal(int joinId)//so we can delete a criminal from a job
+    public ActionResult DeleteEngineer(int joinId)//so we can delete a criminal from a machine
     {
-      var joinEntry = _db.CriminalJob.FirstOrDefault(entry => entry.CriminalJobId == joinId);
-      _db.CriminalJob.Remove(joinEntry);
+      var joinEntry = _db.EngineerMachine.FirstOrDefault(entry => entry.EngineerMachineId == joinId);
+      _db.EngineerMachine.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
