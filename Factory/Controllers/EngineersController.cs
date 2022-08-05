@@ -6,18 +6,18 @@ using System.Linq;
 
 namespace Factory.Controllers
 {
-  public class CriminalsController : Controller
+  public class EngineersController : Controller
   {
     private readonly FactoryContext _db;
 
-    public CriminalsController(FactoryContext db)
+    public EngineersController(FactoryContext db)
     {
       _db = db;
     }
 
     public ActionResult Index()
     {
-      List<Criminal> model = _db.Criminals.ToList();
+      List<Engineer> model = _db.Engineers.ToList();
       return View(model);
     }
 
@@ -27,48 +27,48 @@ namespace Factory.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Criminal criminal)
+    public ActionResult Create(Engineer engineer)
     {
-      _db.Criminals.Add(criminal);
+      _db.Engineers.Add(engineer);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Details(int id)
     {
-      var thisCriminal = _db.Criminals
-          .Include(criminal => criminal.Jobs)
+      var thisEngineer = _db.Engineers
+          .Include(engineer => engineer.Jobs)
           .ThenInclude(join => join.Job)
-          .FirstOrDefault(criminal => criminal.CriminalId == id);
-      return View(thisCriminal);
+          .FirstOrDefault(engineer => engineer.EngineerId == id);
+      return View(thisEngineer);
       
     }
     
     public ActionResult Edit(int id)
     {
-      var thisCriminal = _db.Criminals.FirstOrDefault(criminal => criminal.CriminalId == id);
-      return View(thisCriminal);
+      var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      return View(thisEngineer);
     }
 
     [HttpPost]
-    public ActionResult Edit(Criminal criminal)
+    public ActionResult Edit(Engineer engineer)
     {
-      _db.Entry(criminal).State = EntityState.Modified;
+      _db.Entry(engineer).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Delete(int id)
     {
-      var thisCriminal = _db.Criminals.FirstOrDefault(criminal => criminal.CriminalId == id);
-      return View(thisCriminal);
+      var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      return View(thisEngineer);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      var thisCriminal = _db.Criminals.FirstOrDefault(criminal => criminal.CriminalId == id);
-      _db.Criminals.Remove(thisCriminal);
+      var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      _db.Engineers.Remove(thisEngineer);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
