@@ -43,9 +43,8 @@ namespace Factory.Controllers
     public ActionResult Details(int id)
     {
         var thisMachine = _db.Machines
-          // .Include(machine => machine.Engineers) //gathers the EngineerIds associated with the Machine object in Machine.cs(this.Engineers)
-          // .ThenInclude(join => join.Engineer) //Grabs the Engineer object using their Id
-          //commented out to see if something breaks
+          .Include(machine => machine.JoinEntities) //gathers the EngineerIds associated with the Machine object in Machine.cs(this.Engineers)
+          .ThenInclude(join => join.Engineer) //Grabs the Engineer object using their Id
           .FirstOrDefault(machine => machine.MachineId == id);//specifies which machine we are working with
         return View(thisMachine);
     }
