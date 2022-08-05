@@ -2,6 +2,10 @@
 	box-sizing: border-box;
 }
 
+#title {
+	color: white;
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -24,7 +28,7 @@ body {
 }
 
 .links li {
-	list-style-type: none;
+	list-style: none;
 	display: block;
 	padding: 1rem;
 	text-decoration: none;
