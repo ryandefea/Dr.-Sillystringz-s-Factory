@@ -4,7 +4,7 @@ namespace Factory.Models
 {
   public class Machine
   {
-    public machine()
+    public Machine()
     {
       this.JoinEntities = new HashSet<EngineerMachine>();
     }
