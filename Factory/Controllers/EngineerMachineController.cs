@@ -9,14 +9,14 @@ namespace Factory.Controllers
 {
   public class EngineerMachineController : Controller
   {
-    private readonly FactorContext _db;
+    private readonly FactoryContext _db;
 
     public EngineerMachineController(FactoryContext db)
     {
       _db = db;
     }
 
-    public Action Result Index();
+    public ActionResult Index()
     {
       List<EngineerMachine> model = _db.EngineerMachine.ToList();
       return View(model);
