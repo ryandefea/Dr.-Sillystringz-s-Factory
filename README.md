@@ -84,7 +84,7 @@ This Setup assumes you have GitBash and MySQL Workbench pre-installed.
 <details>
 <summary><strong>To Run</strong></summary>
 Navigate to:  
-   <pre>Sillystringz.Solution
+   <pre>DR.-SILLYSTRINGZ-S-FACTORY
    └── <strong>Factory</strong></pre>
 
 Run ```$ dotnet restore``` in the terminal.<br>
