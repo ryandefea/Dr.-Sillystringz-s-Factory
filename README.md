@@ -62,7 +62,7 @@ This Setup assumes you have GitBash and MySQL Workbench pre-installed.
 
 <pre>{
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;database=garrett_hays;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];"
+    "DefaultConnection": "Server=localhost;Port=3306;database=ryan_defea;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];"
   }
 }</pre>
 <small>*Note: you must include your password in the code block section labeled "YOUR-PASSWORD-HERE".</small><br>
@@ -75,7 +75,7 @@ This Setup assumes you have GitBash and MySQL Workbench pre-installed.
 
 <ol> 
   <li>Open SQL Workbench.
-  <li>Navigate to "garrett_hays" schema.
+  <li>Navigate to "ryan_defea" schema.
   <li>Click the drop down, select "Tables" drop down.
   <li>Verify the tables, you should see <strong>engineers</strong>, <strong>machines</strong>, & <strong>engineermachine</strong>.
   
@@ -97,7 +97,7 @@ This program was built using *`Microsoft .NET SDK 5.0.401`*, and may not be comp
 ---
 ## Known Bugs
 
-* _No known issues_
+* _The machine and engineer links on the splash page are currently broken._
 
 ## License
 
